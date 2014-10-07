@@ -1,0 +1,7 @@
+yolk
+ipython
+ipdb
+matplotlib
+numpy
+pandas
+scipy
