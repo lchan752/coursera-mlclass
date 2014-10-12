@@ -1,6 +1,14 @@
 import math
 import numpy as np
-from scipy import special,optimize
+from scipy import special,optimize,misc
+import matplotlib.pyplot as plt
+
+def print_number(X):
+    img = misc.toimage(X[1:].reshape(20,20))
+    figure  = plt.figure()
+    axes    = figure.add_subplot(111)
+    axes.imshow( img )
+    plt.show()
 
 def sigmoid(z):
     """
@@ -60,4 +68,20 @@ def accuracy(predicted_y, expected_y):
     m = predicted_y.size
     difference = predicted_y[predicted_y != expected_y].size
     return (1-difference/float(m))*100
+
+def feedforward(X,y,theta1,theta2):
+    """
+    Return m predictions from this neural network.
+    m = number of samples = X.shape[0]
+    Each prediction is a number between 0,K (for K classes)
+    """
+    m,_ = X.shape
+    retlist = []
+    for s in range(0,m):
+        a_1 = X[s,:] # (n+1,1)
+        a_2 = sigmoid(theta1.dot(a_1)) # (25,1)
+        a_2 = np.insert(a_2,0,1,axis=0) # (26,1)
+        a_3 = sigmoid(theta2.dot(a_2)) # (10,1)
+        retlist.append(np.argmax(a_3))
+    return np.array(retlist)
         

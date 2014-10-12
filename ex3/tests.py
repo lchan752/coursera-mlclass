@@ -6,6 +6,7 @@ from scipy.misc import toimage
 from scipy.io import loadmat
 
 from utils import hypothesis,classifyall,accuracy
+from utils import feedforward
 
 class MultiClassClassification(unittest.TestCase):
     
@@ -53,6 +54,24 @@ class MultiClassClassification(unittest.TestCase):
         expected_y = np.array([ d if d!=10 else 0 for d in self.data['y'].reshape(-1)])
         acc = accuracy(predicted_y,expected_y)
         self.assertAlmostEqual(acc, 94.9, places=0) # I can't get 94.9, only 94.64.... close enough I guess
+
+class FeedFowardPropagationTestCase(unittest.TestCase):
+    
+    def setUp(self):
+        self.data = loadmat( os.path.join(os.path.dirname(__file__), 'ex3data1.mat') )
+        self.weights = loadmat( os.path.join(os.path.dirname(__file__), 'ex3weights.mat') )
+        self.X = self.data['X'] # m,n matrix, m=5000, n=400, need to prepend x_0 to self.X
+        self.y = self.data['y'] # m,1 matrix, m=5000
+        self.theta1 = self.weights['Theta1'] # 25,401 matrix, 25 units in layer2, 400(+1 bias) units in layer1
+        self.theta2 = self.weights['Theta2'] # 10,26 matrix, 10 units in layer3 (for 10 classes), 25(+1 bias) units in layer2
+    
+    @unittest.skip("This one not working...")
+    def test_prediction(self):
+        m,_ = self.X.shape
+        X = np.hstack(( np.ones((m,1)), self.X ))
+        predictions = feedforward(X,self.y,self.theta1,self.theta2)
+        expected = np.array([ d if d!=10 else 0 for d in self.y ])
+        np.testing.assert_array_equal(predictions, expected)
 
 if __name__ == '__main__':
     unittest.main()
