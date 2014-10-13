@@ -8,10 +8,12 @@ from scipy.io import loadmat
 from utils import hypothesis,classifyall,accuracy
 from utils import feedforward
 
+DATA_DIR = os.path.join(os.path.dirname(__file__),os.pardir,'data')
+
 class MultiClassClassification(unittest.TestCase):
     
     def setUp(self):
-        self.data = loadmat( os.path.join(os.path.dirname(__file__), 'ex3data1.mat') )
+        self.data = loadmat( os.path.join(DATA_DIR,'ex3data1.mat') )
         self.X = self.data['X']
         
         m,_ = self.X.shape
@@ -58,8 +60,8 @@ class MultiClassClassification(unittest.TestCase):
 class FeedFowardPropagationTestCase(unittest.TestCase):
     
     def setUp(self):
-        self.data = loadmat( os.path.join(os.path.dirname(__file__), 'ex3data1.mat') )
-        self.weights = loadmat( os.path.join(os.path.dirname(__file__), 'ex3weights.mat') )
+        self.data = loadmat( os.path.join(DATA_DIR, 'ex3data1.mat') )
+        self.weights = loadmat( os.path.join(DATA_DIR, 'ex3weights.mat') )
         self.X = self.data['X'] # m,n matrix, m=5000, n=400, need to prepend x_0 to self.X
         self.y = self.data['y'] # m,1 matrix, m=5000
         self.theta1 = self.weights['Theta1'] # 25,401 matrix, 25 units in layer2, 400(+1 bias) units in layer1

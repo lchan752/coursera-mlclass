@@ -8,6 +8,8 @@ from utils import gradient_descent,hypothesis,classify
 from utils import map_feature,regularized_cost_function_loop,regularized_cost_function,regularized_cost_gradient
 from utils import regularized_gradient_descent
 
+DATA_DIR = os.path.join(os.path.dirname(__file__),os.pardir,'data')
+
 class ClassificationTestCase(unittest.TestCase):
     
     @classmethod
@@ -15,14 +17,14 @@ class ClassificationTestCase(unittest.TestCase):
         """
         Print out the range of the features, to see if we need to do feature scaling
         """
-        data = np.genfromtxt( os.path.join(os.path.dirname(__file__),'ex2data1.txt'), delimiter=',')
+        data = np.genfromtxt( os.path.join(DATA_DIR,'ex2data1.txt'), delimiter=',')
         X = data[:,0:2] # SELECT col0,col1 FROM self.data
         print "Feature Ranges for ex2data1 (check to see if we need to feature scaling)..."
         print "x1: min={min}, max={max}".format(min=np.min(X[:,0]), max=np.max(X[:,0]))
         print "x2: min={min}, max={max}".format(min=np.min(X[:,1]), max=np.max(X[:,1]))
     
     def setUp(self):
-        self.data = np.genfromtxt( os.path.join(os.path.dirname(__file__),'ex2data1.txt'), delimiter=',')
+        self.data = np.genfromtxt( os.path.join(DATA_DIR,'ex2data1.txt'), delimiter=',')
         self.X = self.data[:,0:2] # SELECT col0,col1 FROM self.data
         self.y = self.data[:,2] # SELECT col2 FROM self.data
         self.m, self.n = self.X.shape
@@ -107,14 +109,14 @@ class RegularizationTestCase(unittest.TestCase):
         """
         Print out the range of the features, to see if we need to do feature scaling
         """
-        data = np.genfromtxt( os.path.join(os.path.dirname(__file__),'ex2data2.txt'), delimiter=',')
+        data = np.genfromtxt( os.path.join(DATA_DIR,'ex2data2.txt'), delimiter=',')
         X = data[:,0:2] # SELECT col0,col1 FROM self.data
         print "Feature Ranges for ex2data2 (check to see if we need to feature scaling)..."
         print "x1: min={min}, max={max}".format(min=np.min(X[:,0]), max=np.max(X[:,0]))
         print "x2: min={min}, max={max}".format(min=np.min(X[:,1]), max=np.max(X[:,1]))
     
     def setUp(self):
-        self.data = np.genfromtxt( os.path.join(os.path.dirname(__file__),'ex2data2.txt'), delimiter=',')
+        self.data = np.genfromtxt( os.path.join(DATA_DIR,'ex2data2.txt'), delimiter=',')
         self.X = self.data[:,0:2] # SELECT col0,col1 FROM self.data
         self.y = self.data[:,2] # SELECT col2 FROM self.data
         self.m, self.n = self.X.shape
@@ -135,7 +137,7 @@ class RegularizationTestCase(unittest.TestCase):
     def test_map_feature(self):
         dimension = 6
         X_mapped = map_feature(self.X[:,0],self.X[:,1],dimension)
-        expected_X_mapped = np.loadtxt(os.path.join(os.path.dirname(__file__),'ex2data2.mapped.txt'))
+        expected_X_mapped = np.loadtxt(os.path.join(DATA_DIR,'ex2data2.mapped.txt'))
         np.testing.assert_almost_equal(X_mapped, expected_X_mapped, decimal=2)
         
     def test_regularized_cost_function(self):

@@ -5,10 +5,12 @@ from utils import feature_normalization_loop, feature_normalization, normal_equa
 import os
 import numpy as np
 
+DATA_DIR = os.path.join(os.path.dirname(__file__),os.pardir,'data')
+
 class LinearRegressionTestCase(unittest.TestCase):
     
     def setUp(self):
-        self.data = np.genfromtxt( os.path.join(os.path.dirname(__file__),'ex1data1.txt'), delimiter=',')
+        self.data = np.genfromtxt( os.path.join(DATA_DIR,'ex1data1.txt'), delimiter=',')
         self.X, self.y = self.data[:, 0], self.data[:, 1]
         self.m = len(self.y)
         self.X = self.X.reshape(self.m,1)
@@ -33,7 +35,7 @@ class LinearRegressionTestCase(unittest.TestCase):
 class LinearRegressionMultiVariableTestCase(unittest.TestCase):
     
     def setUp(self):
-        self.data = np.genfromtxt( os.path.join(os.path.dirname(__file__),'ex1data2.txt'), delimiter=',')
+        self.data = np.genfromtxt( os.path.join(DATA_DIR,'ex1data2.txt'), delimiter=',')
         self.X, self.y = self.data[:, 0:2], self.data[:, 2]
         self.m = len(self.y)
         self.X = self.X.reshape(self.m, 2)
