@@ -3,8 +3,6 @@ import numpy as np
 from scipy import special
 from scipy import optimize
 
-# TODO: should make function parameters support 1d arrays, if it is a x,1 matrix. Or else I will have to mess with reshape all the time.
-
 def sigmoid(z):
     """
     Returns sigmoid vector

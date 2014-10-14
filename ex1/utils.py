@@ -39,8 +39,6 @@ def gradientDescent(X, y, theta, alpha, iterations):
     # If cost goes up, it means alpha is too big, need to reduce alpha
     #import matplotlib.pyplot as plt
     #plt.plot(iter_cnts,iter_costs)
-    
-    # TODO: Try implement gradientDescent with scipy.optimize, and use different optimization functions.
     return theta
 
 def feature_normalization_loop(X):

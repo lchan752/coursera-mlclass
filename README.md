@@ -11,3 +11,7 @@ Class website: https://www.coursera.org/course/ml
  * Regularization to reduce overfitting
 * ex3
  * Multi-class classification with regularization
+ * Neural Network Forward Propagation
+* ex4
+ * Neural Network Cost Function and Regularization
+ * Neural Network Back Propagation

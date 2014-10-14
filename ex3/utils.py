@@ -69,7 +69,7 @@ def accuracy(predicted_y, expected_y):
     difference = predicted_y[predicted_y != expected_y].size
     return (1-difference/float(m))*100
 
-def feedforward(X,y,theta1,theta2):
+def feedforward(X,theta1,theta2):
     """
     Return m predictions from this neural network.
     m = number of samples = X.shape[0]

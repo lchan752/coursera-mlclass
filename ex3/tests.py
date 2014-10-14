@@ -67,13 +67,18 @@ class FeedFowardPropagationTestCase(unittest.TestCase):
         self.theta1 = self.weights['Theta1'] # 25,401 matrix, 25 units in layer2, 400(+1 bias) units in layer1
         self.theta2 = self.weights['Theta2'] # 10,26 matrix, 10 units in layer3 (for 10 classes), 25(+1 bias) units in layer2
     
-    @unittest.skip("This one not working...")
     def test_prediction(self):
         m,_ = self.X.shape
         X = np.hstack(( np.ones((m,1)), self.X ))
-        predictions = feedforward(X,self.y,self.theta1,self.theta2)
-        expected = np.array([ d if d!=10 else 0 for d in self.y ])
-        np.testing.assert_array_equal(predictions, expected)
+        predictions = feedforward(X,self.theta1,self.theta2)
+        
+        # because self.y uses 10 for 0, so the vectorized y representation is shifted.
+        # if y=10, the output layer will look like [0,0,0,0,0,0,0,0,0,1], so argmax == 9 (i.e. 10 in octave/matlab, which represents class 0)
+        # if y=1 , the output layer will look like [1,0,0,0,0,0,0,0,0,0], so argmax == 0 (i.e. 1  in octave/matlab, which represents class 1)
+        # so the fix is, we minus 1 on all elements on y, so the argmax will be 0 indexed, which is good for python.
+        expected = (self.y - 1).reshape(-1)
+        acc = accuracy(predictions,expected)
+        self.assertAlmostEqual(acc, 97.5, places=1)
 
 if __name__ == '__main__':
     unittest.main()
