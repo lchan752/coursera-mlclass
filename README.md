@@ -15,3 +15,6 @@ Class website: https://www.coursera.org/course/ml
 * ex4
  * Neural Network Cost Function and Regularization
  * Neural Network Back Propagation
+* ex5
+ * Diagnosing Bias vs Variance
+ * Debugging linear regression with learning curve and validation curve
