@@ -18,3 +18,7 @@ Class website: https://www.coursera.org/course/ml
 * ex5
  * Diagnosing Bias vs Variance
  * Debugging linear regression with learning curve and validation curve
+* ex6
+ * Support Vector Machines with scikit-learn
+* ex7
+ * k-means clustering
